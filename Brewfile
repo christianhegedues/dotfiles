@@ -11,6 +11,7 @@ brew 'git'
 brew 'moreutils'
 brew 'neofetch'
 brew 'neovim'
+brew 'starship'
 brew 'tmux'
 
 # Apps
