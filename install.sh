@@ -8,6 +8,10 @@ if test ! $(which brew); then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
+# Symlink necessary dotfiles
+rm -rf $HOME/.config
+ln -s $PWD/.config $HOME/.config
+
 # Update Homebrew recipes
 brew update
 
