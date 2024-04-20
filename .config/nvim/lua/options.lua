@@ -1,7 +1,7 @@
 -- [[ Setting options ]]
 -- See `:help vim.opt`
 vim.opt.number = true
-vim.opt.numberwidth   = 4
+vim.opt.numberwidth = 4
 
 -- Enable mouse mode, can be useful for resizing splits.
 vim.opt.mouse = 'a'
@@ -23,7 +23,7 @@ vim.opt.smartcase = true
 
 -- Keep signcolumn on by default
 vim.opt.signcolumn = 'yes'
-vim.opt.colorcolumn   = { "80" }
+vim.opt.colorcolumn = { '80' }
 
 -- Decrease update time
 vim.opt.updatetime = 250

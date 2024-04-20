@@ -46,7 +46,7 @@ return {
       --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
       --    function will be executed to configure the current buffer
       vim.api.nvim_create_autocmd('LspAttach', {
-        group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
+        group = vim.api.nvim_create_augroup('UserLspGroup', { clear = true }),
         callback = function(event)
           -- NOTE: Remember that Lua is a real programming language, and as such it is possible
           -- to define small helper and utility functions so you don't have to repeat yourself.
@@ -93,6 +93,7 @@ return {
           -- Opens a popup that displays documentation about the word under your cursor
           --  See `:help K` for why this keymap.
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
+          map('<C-K>', vim.lsp.buf.signature_help, 'Hover Signatures')
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
@@ -177,7 +178,7 @@ return {
           filetypes = {
             'javascript',
             'typescript',
-            'vue'
+            'vue',
           },
           init_options = {
             vue = {
@@ -202,8 +203,8 @@ return {
         'stylua', -- Used to format Lua code
       })
 
-      require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-      require('mason-lspconfig').setup {
+      require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
+      require('mason-lspconfig').setup({
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
@@ -214,7 +215,7 @@ return {
             require('lspconfig')[server_name].setup(server)
           end,
         },
-      }
+      })
     end,
   },
 }

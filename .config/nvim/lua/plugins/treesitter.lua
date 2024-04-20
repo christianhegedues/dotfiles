@@ -20,13 +20,13 @@ return {
       highlight = {
         enable = true,
         additional_vim_regex_highlighting = {
-          'ruby'
+          'ruby',
         },
       },
       indent = {
         enable = true,
         disable = {
-          'ruby'
+          'ruby',
         },
       },
       context_commentstring = {
