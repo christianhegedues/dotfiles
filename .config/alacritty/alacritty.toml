@@ -1,0 +1,23 @@
+import = ["/Users/chhe/.config/alacritty/tokyonight.toml"]
+
+[env]
+TERM = "alacritty"
+
+[font]
+size = 18.0
+
+[font.bold]
+family = "VictorMono Nerd Font"
+style = "Bold"
+
+[font.bold_italic]
+family = "VictorMono Nerd Font"
+style = "Bold Italic"
+
+[font.italic]
+family = "VictorMono Nerd Font"
+style = "Italic"
+
+[font.normal]
+family = "VictorMono Nerd Font"
+style = "Regular"
