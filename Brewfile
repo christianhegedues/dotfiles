@@ -7,6 +7,7 @@ tap 'homebrew/bundle'
 # Binaries
 brew 'coreutils'
 brew 'findutils'
+brew 'fzf'
 brew 'git'
 brew 'moreutils'
 brew 'neofetch'
