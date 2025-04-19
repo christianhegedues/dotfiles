@@ -186,6 +186,22 @@ return {
             },
           },
         },
+
+        texlab = {
+          filetypes = {
+            'tex',
+            'bib',
+          },
+          settings = {
+            texlab = {
+              bibtexFormatter = 'latexindent',
+              latexFormatter = 'latexindent',
+              latexindent = {
+                modifyLineBreaks = true,
+              },
+            },
+          },
+        },
       }
 
       -- Ensure the servers and tools above are installed
