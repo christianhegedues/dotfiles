@@ -28,16 +28,12 @@ require('lazy').setup({
   require('plugins.lspconfig'),
   require('plugins.conform'),
   require('plugins.blink-cmp'),
+  require('plugins.treesitter'),
 
-  --[[
-  require 'kickstart.plugins.which-key',
+  -- require 'kickstart.plugins.which-key',
+  -- require 'kickstart.plugins.todo-comments',
+  -- require 'kickstart.plugins.mini',
 
-  require 'kickstart.plugins.todo-comments',
-
-  require 'kickstart.plugins.mini',
-
-  require 'kickstart.plugins.treesitter',
-	--]]
   require('plugins.tokyonight'),
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
