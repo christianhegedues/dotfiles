@@ -26,12 +26,12 @@ require('lazy').setup({
   require('plugins.gitsigns'),
   require('plugins.telescope'),
   require('plugins.lspconfig'),
+  require('plugins.conform'),
 
   --[[
   require 'kickstart.plugins.which-key',
 
 
-  require 'kickstart.plugins.conform',
 
   require 'kickstart.plugins.blink-cmp',
 
