@@ -24,11 +24,10 @@ require('lazy').setup({
   -- include a plugin definition from file lua/path/name.lua
 
   require('plugins.gitsigns'),
+  require('plugins.telescope'),
 
   --[[
   require 'kickstart.plugins.which-key',
-
-  require 'kickstart.plugins.telescope',
 
   require 'kickstart.plugins.lspconfig',
 
