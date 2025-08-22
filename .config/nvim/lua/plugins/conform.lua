@@ -1,6 +1,7 @@
 return {
   { -- Autoformat
     'stevearc/conform.nvim',
+    version = '9.1.0',
     event = { 'BufWritePre' },
     cmd = { 'ConformInfo' },
     keys = {
@@ -43,5 +44,4 @@ return {
     },
   },
 }
-
 -- vim: ts=2 sts=2 sw=2 et

@@ -1,13 +1,12 @@
 return {
   { -- Autocompletion
     'saghen/blink.cmp',
+    commit = '4e9edba1b1cef1585cc65e54287229e5d34e4df8',
     event = 'VimEnter',
-    version = '1.*',
     dependencies = {
-      -- Snippet Engine
       {
         'L3MON4D3/LuaSnip',
-        version = '2.*',
+        commit = 'de10d8414235b0a8cabfeba60d07c24304e71f5c',
         build = (function()
           -- Build Step is needed for regex support in snippets.
           -- This step is not supported in many windows environments.
@@ -30,7 +29,11 @@ return {
         },
         opts = {},
       },
-      'folke/lazydev.nvim',
+
+      {
+        'folke/lazydev.nvim',
+        commit = '2367a6c0a01eb9edb0464731cc0fb61ed9ab9d2c',
+      },
     },
     --- @module 'blink.cmp'
     --- @type blink.cmp.Config

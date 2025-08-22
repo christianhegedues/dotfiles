@@ -9,7 +9,7 @@ return {
         markdown = { 'markdownlint' },
         scss = { 'stylelint' },
         typescript = { 'eslint' },
-        vue = { 'eslint', 'stylelint' },
+        vue = { 'eslint' },
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,
@@ -61,3 +61,4 @@ return {
     end,
   },
 }
+-- vim: ts=2 sts=2 sw=2 et
