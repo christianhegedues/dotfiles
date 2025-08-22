@@ -15,13 +15,14 @@ return {
   {
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
+    version = '~2.4.0',
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
       -- Mason must be loaded before its dependents so we need to set it up here.
       -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
       { 'mason-org/mason.nvim', opts = {} },
-      'mason-org/mason-lspconfig.nvim',
-      'WhoIsSethDaniel/mason-tool-installer.nvim',
+      { 'mason-org/mason-lspconfig.nvim' },
+      { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
 
       -- Useful status updates for LSP.
       { 'j-hui/fidget.nvim', opts = {} },
@@ -228,9 +229,6 @@ return {
         --
 
         lua_ls = {
-          -- cmd = { ... },
-          -- filetypes = { ... },
-          -- capabilities = {},
           settings = {
             Lua = {
               completion = {
@@ -242,17 +240,42 @@ return {
           },
         },
 
-        ts_ls = {
-          init_options = {
-            plugins = {
-              {
-                name = '@vue/typescript-plugin',
-                location = vim.fn.expand('$MASON/packages') .. '/vue-language-server/node_modules/@vue/language-server',
-                languages = { 'vue' },
+        vtsls = {
+          settings = {
+            vtsls = {
+              tsserver = {
+                globalPlugins = {
+                  {
+                    name = '@vue/typescript-plugin',
+                    location = vim.fn.expand('$MASON/packages') .. '/vue-language-server/node_modules/@vue/language-server',
+                    languages = { 'vue' },
+                    configNamespace = 'typescript',
+                  },
+                },
+              },
+            },
+            typescript = {
+              inlayHints = {
+                parameterNames = {
+                  enabled = 'all',
+                  -- suppressWhenArgumentMatchesName = true, -- default
+                },
+                parameterTypes = { enabled = true },
+                variableTypes = {
+                  enabled = true,
+                  -- suppressWhenTypeMatchesName = false, -- default
+                },
+                propertyDeclarationTypes = { enabled = true },
+                functionLikeReturnTypes = { enabled = true },
+                enumMemberValues = { enabled = true }, -- typescript only
               },
             },
           },
-          filetypes = { 'typescript', 'javascript', 'vue' },
+          filetypes = {
+            'typescript',
+            'javascript',
+            'vue',
+          },
         },
 
         texlab = {
@@ -283,27 +306,21 @@ return {
       -- `mason` had to be setup earlier: to configure its options see the
       -- `dependencies` table for `nvim-lspconfig` above.
       --
-      -- You can add other tools here that you want Mason to install
-      -- for you, so that they are available from within Neovim.
+      -- You can add other tools here that you want Mason to install for you,
+      -- so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
-      vim.list_extend(ensure_installed, {
-        'stylua', -- Used to format Lua code
-      })
+      vim.list_extend(ensure_installed, { 'stylua' })
       require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
+
       require('mason-lspconfig').setup({
         ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
         automatic_installation = false,
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            -- This handles overriding only values explicitly passed
-            -- by the server configuration above. Useful when disabling
-            -- certain features of an LSP (for example, turning off formatting for ts_ls)
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
-          end,
-        },
       })
+
+      for server_name, config in pairs(servers) do
+        config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, config.capabilities or {})
+        require('lspconfig')[server_name].setup(config)
+      end
     end,
   },
 }
