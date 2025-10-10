@@ -1,12 +1,12 @@
 return {
   { -- Autocompletion
     'saghen/blink.cmp',
-    commit = '4e9edba1b1cef1585cc65e54287229e5d34e4df8',
+    tag = 'v1.7.0',
     event = 'VimEnter',
     dependencies = {
       {
         'L3MON4D3/LuaSnip',
-        commit = 'de10d8414235b0a8cabfeba60d07c24304e71f5c',
+        tag = 'v2.4.0',
         build = (function()
           -- Build Step is needed for regex support in snippets.
           -- This step is not supported in many windows environments.

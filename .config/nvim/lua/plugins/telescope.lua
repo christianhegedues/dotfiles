@@ -40,7 +40,7 @@ return {
       -- Useful for getting pretty icons, but requires a Nerd Font.
       {
         'nvim-tree/nvim-web-devicons',
-        commit = 'c2599a81ecabaae07c49ff9b45dcd032a8d90f1a',
+        commit = 'b8221e42cf7287c4dcde81f232f58d7b947c210d',
         enabled = vim.g.have_nerd_font,
       },
     },

@@ -16,20 +16,20 @@ return {
   {
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
-    commit = '16878c7a018cba66a6e990286bdb6afc29ca13d3',
+    tag = 'v2.5.0',
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
       -- Mason must be loaded before its dependents so we need to set it up here.
       -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
       {
         'mason-org/mason.nvim',
-        commit = '7dc4facca9702f95353d5a1f87daf23d78e31c2a',
+        tag = 'v2.1.0',
         opts = {},
       },
 
       {
         'mason-org/mason-lspconfig.nvim',
-        commit = '1ec4da522fa49dcecee8d190efda273464dd2192',
+        tag = 'v2.1.0',
       },
 
       {
@@ -40,14 +40,14 @@ return {
       -- Useful status updates for LSP.
       {
         'j-hui/fidget.nvim',
-        commit = '4d5858bd4c471c895060e1b9f3575f1551184dc5',
+        commit = '3f5475949679953af6d78654db29b944fa826e6a',
         opts = {},
       },
 
       -- Allows extra capabilities provided by blink.cmp
       {
         'saghen/blink.cmp',
-        commit = '4e9edba1b1cef1585cc65e54287229e5d34e4df8',
+        tag = 'v1.7.0',
       },
     },
     config = function()
