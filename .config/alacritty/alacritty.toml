@@ -1,3 +1,4 @@
+[general]
 import = ["/Users/chhe/.config/alacritty/tokyonight.toml"]
 
 [env]
