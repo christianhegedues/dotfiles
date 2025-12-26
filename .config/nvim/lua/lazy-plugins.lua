@@ -58,6 +58,8 @@ require('lazy').setup({
   -- require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.indent_line',
   require('plugins.lint'),
+  require('plugins.markview'),
+  require('plugins.zk'),
   -- require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.neo-tree',
 
