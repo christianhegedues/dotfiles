@@ -8,13 +8,12 @@
 return {
   {
     'nvim-telescope/telescope.nvim',
-    commit = 'b4da76be54691e854d3e0e02c36b0245f945c2c7',
+    version = '0.2.1',
     event = 'VimEnter',
-    --- branch = '0.1.x',
     dependencies = {
       {
         'nvim-lua/plenary.nvim',
-        commit = 'b9fd5226c2f76c951fc8ed5923d85e4de065e509',
+        version = '0.1.4',
       },
 
       { -- If encountering errors, see telescope-fzf-native README for installation instructions
@@ -40,7 +39,7 @@ return {
       -- Useful for getting pretty icons, but requires a Nerd Font.
       {
         'nvim-tree/nvim-web-devicons',
-        commit = 'b8221e42cf7287c4dcde81f232f58d7b947c210d',
+        commit = '803353450c374192393f5387b6a0176d0972b848',
         enabled = vim.g.have_nerd_font,
       },
     },
