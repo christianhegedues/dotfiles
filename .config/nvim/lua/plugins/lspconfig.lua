@@ -4,7 +4,7 @@ return {
     -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
     -- used for completion, annotations and signatures of Neovim apis
     'folke/lazydev.nvim',
-    commit = '2367a6c0a01eb9edb0464731cc0fb61ed9ab9d2c',
+    version = '1.10.0',
     ft = 'lua',
     opts = {
       library = {
@@ -13,23 +13,24 @@ return {
       },
     },
   },
+
   {
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
-    tag = 'v2.5.0',
+    version = '2.5.0',
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
       -- Mason must be loaded before its dependents so we need to set it up here.
       -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
       {
         'mason-org/mason.nvim',
-        tag = 'v2.1.0',
+        version = '2.1.0',
         opts = {},
       },
 
       {
         'mason-org/mason-lspconfig.nvim',
-        tag = 'v2.1.0',
+        version = '2.1.0',
       },
 
       {
@@ -40,14 +41,14 @@ return {
       -- Useful status updates for LSP.
       {
         'j-hui/fidget.nvim',
-        commit = '3f5475949679953af6d78654db29b944fa826e6a',
+        version = '1.6.1',
         opts = {},
       },
 
       -- Allows extra capabilities provided by blink.cmp
       {
         'saghen/blink.cmp',
-        tag = 'v1.7.0',
+        version = '1.8.0',
       },
     },
     config = function()

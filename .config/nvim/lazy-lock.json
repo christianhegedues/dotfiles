@@ -1,13 +1,13 @@
 {
-  "CopilotChat.nvim": { "branch": "main", "commit": "ed94e56ee8292f5df351e17709ff4b178ca84200" },
+  "CopilotChat.nvim": { "branch": "main", "commit": "07dcc188bc488b2dafa9324bd42088640bee3d19" },
   "LuaSnip": { "branch": "master", "commit": "458560534a73f7f8d7a11a146c801db00b081df0" },
   "blink.cmp": { "branch": "main", "commit": "327fff91fe6af358e990be7be1ec8b78037d2138" },
   "conform.nvim": { "branch": "master", "commit": "3543d000dafbc41cc7761d860cfdb24e82154f75" },
   "copilot.vim": { "branch": "release", "commit": "da369d90cfd6c396b1d0ec259836a1c7222fb2ea" },
-  "fidget.nvim": { "branch": "main", "commit": "3f5475949679953af6d78654db29b944fa826e6a" },
+  "fidget.nvim": { "branch": "main", "commit": "b61e8af9b8b68ee0ec7da5fb7a8c203aae854f2e" },
   "gitsigns.nvim": { "branch": "main", "commit": "42d6aed4e94e0f0bbced16bbdcc42f57673bd75e" },
   "guess-indent.nvim": { "branch": "main", "commit": "84a4987ff36798c2fc1169cbaff67960aed9776f" },
-  "lazy.nvim": { "branch": "main", "commit": "1ea3c4085785f460fb0e46d2fe1ee895f5f9e7c1" },
+  "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },
   "lazydev.nvim": { "branch": "main", "commit": "2367a6c0a01eb9edb0464731cc0fb61ed9ab9d2c" },
   "markview.nvim": { "branch": "main", "commit": "03fe3f42093d47a8536276f682cf057f8c14033b" },
   "mason-lspconfig.nvim": { "branch": "main", "commit": "f2fa60409630ec2d24acf84494fb55e1d28d593c" },
@@ -24,5 +24,5 @@
   "telescope.nvim": { "branch": "master", "commit": "3333a52ff548ba0a68af6d8da1e54f9cd96e9179" },
   "tokyonight.nvim": { "branch": "main", "commit": "4d159616aee17796c2c94d2f5f87d2ee1a3f67c7" },
   "vimtex": { "branch": "master", "commit": "c74d9927d9ac2fd24f965634ab56fc5d3c0a60a7" },
-  "zk-nvim": { "branch": "main", "commit": "8df80d0dc2d66e53b08740361a600746a6e4edcf" }
+  "zk-nvim": { "branch": "main", "commit": "a0b6c64c91cf3a4de1114f127ccd438b9c03e064" }
 }
