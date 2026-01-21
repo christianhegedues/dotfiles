@@ -16,15 +16,8 @@
 return {
   {
     'lewis6991/gitsigns.nvim',
-    version = '1.0.2',
+    version = '2.0.0',
     opts = {
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
       on_attach = function(bufnr)
         local gitsigns = require('gitsigns')
 
@@ -35,17 +28,17 @@ return {
         end
 
         -- Navigation
-        map('n', ']c', function()
+        map('n', '<leader>hc', function()
           if vim.wo.diff then
-            vim.cmd.normal({ ']c', bang = true })
+            vim.cmd.normal({ '<leader>hc', bang = true })
           else
             gitsigns.nav_hunk('next')
           end
         end, { desc = 'Jump to next git [c]hange' })
 
-        map('n', '[c', function()
+        map('n', '<leader>hC', function()
           if vim.wo.diff then
-            vim.cmd.normal({ '[c', bang = true })
+            vim.cmd.normal({ '<leader>hC', bang = true })
           else
             gitsigns.nav_hunk('prev')
           end
