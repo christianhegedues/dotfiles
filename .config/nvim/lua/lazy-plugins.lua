@@ -28,17 +28,11 @@ require('lazy').setup({
   -- include a plugin definition from file lua/path/name.lua
 
   require('plugins.gitsigns'),
-
   require('plugins.telescope'),
-
   require('plugins.lspconfig'),
-
   require('plugins.conform'),
-
   require('plugins.blink-cmp'),
-
   require('plugins.mini'),
-
   require('plugins.treesitter'),
 
   -- require 'kickstart.plugins.which-key',

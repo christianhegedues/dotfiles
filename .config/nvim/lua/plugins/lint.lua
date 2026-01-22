@@ -1,7 +1,7 @@
 return {
   { -- Linting
     'mfussenegger/nvim-lint',
-    commit = '9da1fb942dd0668d5182f9c8dee801b9c190e2bb',
+    commit = 'ca6ea12daf0a4d92dc24c5c9ae22a1f0418ade37',
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
       local lint = require('lint')
