@@ -1,7 +1,7 @@
 return {
   { -- Collection of various small independent plugins/modules
     'nvim-mini/mini.nvim',
-    tag = 'v0.16.0',
+    version = '0.17.0',
     config = function()
       -- Better Around/Inside textobjects
       --
