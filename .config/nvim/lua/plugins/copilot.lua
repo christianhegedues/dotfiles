@@ -1,14 +1,15 @@
 return {
   {
     'CopilotC-Nvim/CopilotChat.nvim',
+    version = '4.7.4',
     dependencies = {
       {
         'github/copilot.vim',
-        tag = 'v1.56.0',
+        tag = 'v1.59.0',
       },
       {
         'nvim-lua/plenary.nvim',
-        commit = 'b9fd5226c2f76c951fc8ed5923d85e4de065e509',
+        version = '0.1.4',
       },
     },
     build = 'make tiktoken',
