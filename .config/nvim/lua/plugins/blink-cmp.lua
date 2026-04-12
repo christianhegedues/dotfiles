@@ -38,8 +38,14 @@ require('blink-cmp').setup({
 
   completion = {
     menu = {
+      border = 'rounded',
       draw = {
         treesitter = { 'lsp' },
+      },
+    },
+    documentation = {
+      window = {
+        border = 'rounded',
       },
     },
     ghost_text = {
