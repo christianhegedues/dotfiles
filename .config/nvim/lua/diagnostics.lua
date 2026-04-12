@@ -1,19 +1,14 @@
 -- Diagnostic Config
 -- See :help vim.diagnostic.Opts
 vim.diagnostic.config({
-  update_in_insert = false,
+  virtual_text = true,
   severity_sort = true,
-  float = { border = 'rounded', source = 'if_many' },
-  underline = { severity = vim.diagnostic.severity.WARN },
 
-  -- Can switch between these as you prefer
-  virtual_text = true, -- Text shows up at the end of the line
-  virtual_lines = false, -- Text shows up underneath the line, with virtual lines
+  float = {
+    border = 'rounded',
+    source = 'if_many',
+  },
 
-  -- Auto open the float, so you can easily read the errors when jumping
-  jump = { float = true },
-
-  -- Custom diagnostic signs
   signs = vim.g.have_nerd_font and {
     text = {
       [vim.diagnostic.severity.ERROR] = '󰅚 ',
@@ -22,4 +17,12 @@ vim.diagnostic.config({
       [vim.diagnostic.severity.HINT] = '󰌶 ',
     },
   } or {},
+})
+
+-- Diagnostic keymaps
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, {
+  desc = 'Open diagnostics in a floating window',
+})
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setqflist, {
+  desc = 'Open diagnostics [Q]uickfix list',
 })

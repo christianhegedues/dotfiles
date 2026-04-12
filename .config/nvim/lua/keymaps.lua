@@ -5,14 +5,6 @@
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, {
-  desc = 'Open diagnostics [Q]uickfix list',
-})
-
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
 -- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
@@ -35,9 +27,7 @@ vim.keymap.set('n', '<S-Tab>', ':bprevious<CR>')
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlights when yanking (copying) text',
   group = vim.api.nvim_create_augroup('chhe-yank', { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
+  callback = function() vim.highlight.on_yank() end,
 })
 
 -- vim: ts=2 sts=2 sw=2 et
