@@ -16,6 +16,10 @@ require('keymaps')
 require('diagnostics')
 
 -- [[ Plugins ]]
+require('vim._core.ui2').enable({
+  enable = true,
+})
+--
 require('plugins.plenary')
 require('plugins.lazydev')
 
