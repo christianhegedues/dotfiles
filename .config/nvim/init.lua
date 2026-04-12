@@ -1,4 +1,4 @@
--- Set , as the leader key
+-- Set `,` as the leader key
 -- See: `:help mapleader`
 vim.g.mapleader = ','
 vim.g.maplocalleader = ','
@@ -12,30 +12,33 @@ require('options')
 -- [[ Basic Keymaps ]]
 require('keymaps')
 
--- [[ Install `lazy.nvim` plugin manager ]]
--- See `:help lazy.nvim.txt`
-local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
-  local out = vim.fn.system({ 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath })
-  if vim.v.shell_error ~= 0 then
-    error('Error cloning lazy.nvim:\n' .. out)
-  end
-end
+-- [[ Diagnostics ]]
+require('diagnostics')
 
---@type vim.Option
-local rtp = vim.opt.rtp
-rtp:prepend(lazypath)
+-- [[ Plugins ]]
+require('plugins.plenary')
+require('plugins.lazydev')
 
-require('lazy-plugins')
+-- require 'plugins.which-key',
+-- require 'plugins.todo-comments',
+-- require 'plugins.debug',
+-- require 'plugins.indent_line',
+-- require 'plugins.autopairs',
+-- require 'plugins.neo-tree',
 
---[[
-require('lazy').setup({ import = 'plugins' }, {
-  change_detection = {
-    notify = false,
-  },
-})
---]]
+require('plugins.blink-cmp')
 
+require('plugins.guess-indent')
+require('plugins.treesitter')
+require('plugins.lspconfig')
+require('plugins.gitsigns')
+require('plugins.telescope')
+require('plugins.mini')
+require('plugins.conform')
+require('plugins.lint')
+require('plugins.markview')
+require('plugins.zk')
+require('plugins.copilot')
+require('plugins.tokyonight')
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
