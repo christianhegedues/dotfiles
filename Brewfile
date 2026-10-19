@@ -14,6 +14,7 @@ brew 'neofetch'
 brew 'neovim'
 brew 'starship'
 brew 'tmux'
+brew 'tree-sitter-cli'
 brew 'volta'
 
 # Apps

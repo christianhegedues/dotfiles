@@ -1,29 +1,21 @@
+-- Must be registered before vim.pack.add to also catch the initial install
+vim.api.nvim_create_autocmd('PackChanged', {
+  desc = 'Update treesitter parsers after plugin update',
+  group = vim.api.nvim_create_augroup('chhe-treesitter-update', { clear = true }),
+  callback = function(ev)
+    local name, kind = ev.data.spec.name, ev.data.kind
+    if name == 'nvim-treesitter' and kind == 'update' then
+      if not ev.data.active then vim.cmd.packadd('nvim-treesitter') end
+      vim.cmd('TSUpdate')
+    end
+  end,
+})
+
 vim.pack.add({
   {
     src = 'https://github.com/nvim-treesitter/nvim-treesitter',
     version = 'main',
   },
-})
-
-vim.api.nvim_create_autocmd('PackChanged', {
-  desc = 'Handle nvim-treesitter updates',
-  group = vim.api.nvim_create_augroup(
-    'nvim-treesitter-pack-change-update',
-    { clear = true }
-  ),
-  callback = function(ev)
-    if ev.data.kind == 'update' then
-      local ok = pcall(vim.cmd, 'TSUpdate')
-      if ok then
-        vim.notify('TSUpdate completed successfully', vim.log.levels.INFO)
-      else
-        vim.notify(
-          'TSUpdate command not available yet, skipping',
-          vim.log.levels.WARN
-        )
-      end
-    end
-  end,
 })
 
 local parsers = {
@@ -46,17 +38,16 @@ local parsers = {
   'vue',
 }
 
-require('nvim-treesitter').setup({})
 require('nvim-treesitter').install(parsers)
 
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = parsers,
-  callback = function()
-    local filetype = vim.bo.filetype
-    if filetype and filetype ~= '' then
-      local ok = pcall(function() vim.treesitter.start() end)
-      if not ok then return end
-    end
+  desc = 'Start treesitter for supported filetypes',
+  group = vim.api.nvim_create_augroup('chhe-treesitter', { clear = true }),
+  callback = function(ev)
+    -- Parser names don't always match filetypes (e.g. bash -> sh, vimdoc ->
+    -- help). Resolve here, as nvim-treesitter registers them after init.lua.
+    local lang = vim.treesitter.language.get_lang(ev.match)
+    if vim.list_contains(parsers, lang) then pcall(vim.treesitter.start) end
   end,
 })
 -- vim: ts=2 sts=2 sw=2 et
