@@ -50,4 +50,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function() vim.highlight.on_yank() end,
 })
 
+-- German layout: ö/ä as [/]
+vim.keymap.set({ 'n', 'x', 'o' }, 'ö', '[', { remap = true })
+vim.keymap.set({ 'n', 'x', 'o' }, 'ä', ']', { remap = true })
+
 -- vim: ts=2 sts=2 sw=2 et
