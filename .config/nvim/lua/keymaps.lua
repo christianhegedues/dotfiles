@@ -24,6 +24,26 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>')
 vim.keymap.set('n', '<Tab>', ':bnext<CR>')
 vim.keymap.set('n', '<S-Tab>', ':bprevious<CR>')
 
+-- Replaces selected text WITHOUT losing what you yanked
+vim.keymap.set('x', 'p', [["_dP]])
+
+-- Move selected line / block of text in visual mode
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { silent = true })
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { silent = true })
+
+-- Stay in indent mode when indenting in visual mode
+vim.keymap.set('v', '<', '<gv')
+vim.keymap.set('v', '>', '>gv')
+
+-- Keep the cursor in the middle of the screen when moving up and down
+vim.keymap.set('n', 'n', 'nzzzv')
+vim.keymap.set('n', 'N', 'Nzzzv')
+
+vim.keymap.set('n', '<leader>u', function()
+  vim.cmd.packadd('nvim.undotree')
+  require('undotree').open()
+end, { desc = 'Open UndoTree' })
+
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlights when yanking (copying) text',
   group = vim.api.nvim_create_augroup('chhe-yank', { clear = true }),
