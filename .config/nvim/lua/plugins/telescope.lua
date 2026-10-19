@@ -1,32 +1,33 @@
-local fzf = function()
-  if vim.fn.executable('make') == 1 then
-    return 'https://github.com/nvim-telescope/telescope-fzf-native.nvim'
-  end
-end
-
-local devicons = function()
-  if vim.g.have_nerd_font then
-    return 'https://github.com/nvim-tree/nvim-web-devicons'
-  end
-end
-
-vim.pack.add({
-  fzf(),
-  devicons(),
-  { src = 'https://github.com/nvim-telescope/telescope-ui-select.nvim' },
-  { src = 'https://github.com/nvim-telescope/telescope.nvim' },
-})
-
+-- Must be registered before vim.pack.add to also catch the initial install
 vim.api.nvim_create_autocmd('PackChanged', {
+  desc = 'Build telescope-fzf-native after install/update',
+  group = vim.api.nvim_create_augroup('chhe-telescope-build', { clear = true }),
   callback = function(ev)
     local name, kind = ev.data.spec.name, ev.data.kind
     if
-      name == 'telescope-fzf-native' and (kind == 'install' or kind == 'update')
+      name == 'telescope-fzf-native.nvim'
+      and (kind == 'install' or kind == 'update')
     then
-      vim.system({ 'make' }, { cwd = ev.data.path })
+      -- Wait so the extension can be loaded below
+      vim.system({ 'make' }, { cwd = ev.data.path }):wait()
     end
   end,
 })
+
+local plugins = {
+  'https://github.com/nvim-telescope/telescope-ui-select.nvim',
+  'https://github.com/nvim-telescope/telescope.nvim',
+}
+if vim.fn.executable('make') == 1 then
+  table.insert(
+    plugins,
+    'https://github.com/nvim-telescope/telescope-fzf-native.nvim'
+  )
+end
+if vim.g.have_nerd_font then
+  table.insert(plugins, 'https://github.com/nvim-tree/nvim-web-devicons')
+end
+vim.pack.add(plugins)
 
 -- Telescope is a fuzzy finder that comes with a lot of different things that
 -- it can fuzzy find! It's more than just a "file finder", it can search
@@ -58,10 +59,16 @@ require('telescope').setup({
   --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
   --   },
   -- },
-  -- pickers = {}
+  pickers = {
+    find_files = {
+      -- Include hidden files, but skip .git/ (rg already respects .gitignore)
+      find_command = { 'rg', '--files', '--hidden', '--glob', '!.git/' },
+    },
+  },
+
   extensions = {
     ['ui-select'] = {
-      require('telescope.themes').get_dropdown(),
+      require('telescope.themes').get_ivy(),
     },
     fzf = {
       fuzzy = true, -- false will only do exact matching
@@ -137,7 +144,7 @@ vim.keymap.set(
   'n',
   '<leader><leader>',
   builtin.buffers,
-  { desc = '[ ] Find existing buffers' }
+  { desc = '[,] Find existing buffers' }
 )
 
 -- Slightly advanced example of overriding default behavior and theme
