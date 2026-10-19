@@ -20,6 +20,24 @@ vim.diagnostic.config({
 })
 
 -- Diagnostic keymaps
+vim.keymap.set(
+  'n',
+  '<leader>dn',
+  function() vim.diagnostic.jump({ count = 1, float = true }) end,
+  {
+    desc = 'Jumps to the next diagnostic',
+  }
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>dm',
+  function() vim.diagnostic.jump({ count = -1, float = true }) end,
+  {
+    desc = 'Jumps to the previous diagnostic',
+  }
+)
+
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, {
   desc = 'Open diagnostics in a floating window',
 })
