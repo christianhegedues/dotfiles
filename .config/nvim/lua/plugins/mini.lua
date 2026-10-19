@@ -21,6 +21,18 @@ require('mini.ai').setup({ n_lines = 500 })
 -- - sr)'  - [S]urround [R]eplace [)] [']
 require('mini.surround').setup()
 
+-- File explorer with editable buffers
+--
+-- - -     - Toggle explorer at the current file
+-- - l / h - Go in / out of a directory
+-- - =     - Apply file system changes
+require('mini.files').setup()
+vim.keymap.set('n', '-', function()
+  if MiniFiles.close() == nil then
+    MiniFiles.open(vim.api.nvim_buf_get_name(0))
+  end
+end, { desc = 'Toggle file explorer' })
+
 -- Simple and easy statusline.
 --  You could remove this setup call if you don't like it,
 --  and try some other statusline plugin
