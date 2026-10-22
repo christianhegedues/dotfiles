@@ -1,13 +1,12 @@
-if type brew &>/dev/null
-then
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-
-  autoload -Uz compinit
-  zstyle ':completion:*' menu select
-  zmodload zsh/complist
-  compinit
-  _comp_options+=(globdots)
+if [[ -n $HOMEBREW_PREFIX ]]; then
+  FPATH="$HOMEBREW_PREFIX/share/zsh/site-functions:${FPATH}"
 fi
+
+autoload -Uz compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+compinit
+_comp_options+=(globdots)
 
 # History file for zsh
 HISTFILE=~/.cache/zsh/history
@@ -24,7 +23,7 @@ setopt SHARE_HISTORY #1
 setopt HIST_IGNORE_ALL_DUPS #2
 setopt HIST_IGNORE_SPACE #3
 
-# Vi mdoe:
+# Vi mode:
 bindkey -v
 export KEYTIMEOUT=1
 
