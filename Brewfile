@@ -1,12 +1,7 @@
-# Taps
-tap 'homebrew/cask'
-tap 'homebrew/cask-fonts'
-tap 'homebrew/cask-versions'
-tap 'homebrew/bundle'
-
 # Binaries
 brew 'coreutils'
 brew 'findutils'
+brew 'fnm'
 brew 'fzf'
 brew 'git'
 brew 'moreutils'

@@ -27,10 +27,8 @@ setopt HIST_IGNORE_SPACE #3
 bindkey -v
 export KEYTIMEOUT=1
 
-# NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# fnm (Node version manager)
+eval "$(fnm env --use-on-cd --version-file-strategy=recursive --shell zsh)"
 
 eval "$(starship init zsh)"
 
