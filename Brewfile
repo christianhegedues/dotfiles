@@ -16,7 +16,6 @@ brew 'ripgrep'
 brew 'starship'
 brew 'tmux'
 brew 'tree-sitter-cli'
-brew 'volta'
 
 # Apps
 cask 'alacritty'
