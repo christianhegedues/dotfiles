@@ -11,6 +11,7 @@ fi
 
 # History file for zsh
 HISTFILE=~/.cache/zsh/history
+[[ -d ${HISTFILE:h} ]] || mkdir -p ${HISTFILE:h}
 
 # How many commands to store in history
 HISTSIZE=10000
@@ -18,8 +19,10 @@ SAVEHIST=10000
 
 # 1: Share history in every terminal session
 # 2: Do not save duplicate commands to history
+# 3: Ignore commands that start with a space
 setopt SHARE_HISTORY #1
 setopt HIST_IGNORE_ALL_DUPS #2
+setopt HIST_IGNORE_SPACE #3
 
 # Vi mdoe:
 bindkey -v
