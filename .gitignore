@@ -1,6 +1,8 @@
 Brewfile.lock.json
 github-copilot
 
+.config/configstore
+
 # OS generated files #
 ######################
 .DS_Store
