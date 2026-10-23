@@ -1,0 +1,9 @@
+[user]
+	name = "Christian Hegedüs"
+	useConfigOnly = true
+[push]
+	autoSetupRemote = true
+[core]
+	editor = "nvim"
+[color]
+	ui = true
