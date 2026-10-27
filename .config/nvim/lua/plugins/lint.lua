@@ -20,7 +20,13 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
     -- Only run the linter in buffers that you can modify in order to avoid
     -- superfluous noise, notably within the handy LSP pop-ups that describe the
     -- hovered symbol using Markdown.
-    if vim.bo.modifiable then lint.try_lint() end
+    if vim.bo.modifiable then
+      -- Linters like eslint are often only installed per project, so don't
+      -- complain when they are missing.
+      lint.try_lint(nil, {
+        ignore_errors = true,
+      })
+    end
   end,
 })
 -- vim: ts=2 sts=2 sw=2 et

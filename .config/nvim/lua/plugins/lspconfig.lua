@@ -13,6 +13,29 @@ vim.pack.add({
 require('mason').setup({})
 
 local capabilities = require('blink-cmp').get_lsp_capabilities()
+
+--- Returns the project root if it depends on TypeScript >= 7. The native
+--- (Go) compiler no longer ships tsserver.js but its own language server
+--- (`tsc --lsp`), so vtsls would silently fall back to its bundled TypeScript.
+---@param bufnr integer
+---@return string?
+local function ts_native_root(bufnr)
+  local name = vim.api.nvim_buf_get_name(bufnr)
+  if name == '' then return nil end
+  for dir in vim.fs.parents(name) do
+    local pkg = dir .. '/node_modules/typescript/package.json'
+    if vim.uv.fs_stat(pkg) then
+      local ok, json =
+        pcall(vim.json.decode, table.concat(vim.fn.readfile(pkg)))
+      local major = ok and tonumber((json.version or ''):match('^(%d+)'))
+      return major and major >= 7 and dir or nil
+    end
+  end
+end
+
+-- Captured before we override vtsls below.
+local vtsls_root_dir = vim.lsp.config.vtsls.root_dir
+
 local servers = {
   lua_ls = {
     capabilities = capabilities,
@@ -28,9 +51,37 @@ local servers = {
       },
     },
   },
+  tsc_native = {
+    capabilities = capabilities,
+    cmd = function(dispatchers, config)
+      return vim.lsp.rpc.start(
+        { config.root_dir .. '/node_modules/.bin/tsc', '--lsp', '--stdio' },
+        dispatchers,
+        { cwd = config.root_dir }
+      )
+    end,
+    filetypes = {
+      'javascript',
+      'javascriptreact',
+      'typescript',
+      'typescriptreact',
+    },
+    root_dir = function(bufnr, on_dir)
+      local root = ts_native_root(bufnr)
+      if root then on_dir(root) end
+    end,
+  },
   vtsls = {
     capabilities = capabilities,
     filetypes = { 'typescript', 'javascript', 'vue' },
+    -- Leave TypeScript >= 7 projects to tsc_native, except for Vue files
+    -- which need the Vue tsserver plugin.
+    root_dir = function(bufnr, on_dir)
+      if vim.bo[bufnr].filetype ~= 'vue' and ts_native_root(bufnr) then
+        return
+      end
+      vtsls_root_dir(bufnr, on_dir)
+    end,
     settings = {
       vtsls = {
         tsserver = {
@@ -71,7 +122,10 @@ local servers = {
 --
 -- You can add other tools here that you want Mason to install for you,
 -- so that they are available from within Neovim.
-local ensure_installed = vim.tbl_keys(servers or {})
+local ensure_installed = vim.tbl_filter(
+  function(name) return name ~= 'tsc_native' end,
+  vim.tbl_keys(servers or {})
+)
 vim.list_extend(ensure_installed, { 'stylua' })
 require('mason-tool-installer').setup({
   ensure_installed = ensure_installed,
@@ -79,7 +133,10 @@ require('mason-tool-installer').setup({
 
 require('mason-lspconfig').setup({
   ensure_installed = {},
-  automatic_installation = false,
+  -- ts_ls would attach alongside vtsls and duplicate every diagnostic.
+  automatic_enable = {
+    exclude = { 'ts_ls' },
+  },
 })
 
 -- LSP servers and clients are able to communicate to each other what features they support.
@@ -100,6 +157,8 @@ require('mason-lspconfig').setup({
 for server_name, config in pairs(servers) do
   vim.lsp.config[server_name] = config
 end
+-- Not a Mason package, so mason-lspconfig won't enable it for us.
+vim.lsp.enable('tsc_native')
 
 -- Brief aside: **What is LSP?**
 --
